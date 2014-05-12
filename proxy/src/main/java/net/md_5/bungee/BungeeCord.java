@@ -616,6 +616,20 @@ public class BungeeCord extends ProxyServer
     }
 
     @Override
+    public void setDefaultServer(String server)
+    {
+        if ( getServerInfo( server ) == null )
+        {
+            throw new IllegalArgumentException( "Unknown Server" );
+        }
+
+        for ( ListenerInfo listenerInfo : config.getListeners() )
+        {
+            listenerInfo.setDefaultServer( server );
+        }
+    }
+
+    @Override
     public Collection<String> getDisabledCommands()
     {
         return config.getDisabledCommands();
